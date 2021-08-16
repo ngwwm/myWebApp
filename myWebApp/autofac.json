@@ -1,0 +1,14 @@
+{
+  "defaultAssembly": "myWebApp",
+  "components": [
+    {
+      "type": "myWebApp.DataLayer.OracleDatabase",
+      "services": [
+        {
+          "type": "myWebApp.DataLayer.IDatabase"
+        }
+      ],
+      "injectProperties": true
+    }
+  ]
+}
