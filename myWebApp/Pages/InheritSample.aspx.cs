@@ -22,6 +22,11 @@ namespace myWebApp.Pages
             CreateAssembly();
         }
 
+        protected void Page_UnLoad(object sender, EventArgs e)
+        {
+            //_database.Disconnect();
+        }
+
         private string fname = "Martin";
         private string lname = "NG";
 

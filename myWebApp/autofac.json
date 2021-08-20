@@ -2,7 +2,7 @@
   "defaultAssembly": "myWebApp",
   "components": [
     {
-      "type": "myWebApp.DataLayer.OracleDatabase",
+      "type": "myWebApp.DataLayer.MSSQLDatabase",
       "services": [
         {
           "type": "myWebApp.DataLayer.IDatabase"
