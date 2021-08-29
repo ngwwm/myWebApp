@@ -10,6 +10,8 @@ using Autofac;
 using Autofac.Configuration;
 using Autofac.Integration.Web;
 using Microsoft.Extensions.Configuration;
+using myWebApp.BusinessLayer;
+using myWebApp.DataAccessLayer.Sales;
 using myWebApp.DataLayer;
 
 namespace myWebApp
@@ -34,18 +36,22 @@ namespace myWebApp
             var config = new ConfigurationBuilder();
             // config.AddJsonFile comes from Microsoft.Extensions.Configuration.Json
             // config.AddXmlFile comes from Microsoft.Extensions.Configuration.Xml
-            config.AddJsonFile("autofac.json");
+            //config.AddJsonFile("autofac.json");
 
             // Register the ConfigurationModule with Autofac.
+ /*
             var module = new ConfigurationModule(config.Build());
             var builder = new ContainerBuilder();
             builder.RegisterModule(module);
-
+*/
 
 
             // Build up your application container and register your dependencies.
-//            var builder = new ContainerBuilder();
-//            builder.RegisterType<Action<MSSQLDatabase>>().As<IDatabase>();
+            var builder = new ContainerBuilder();
+            builder.RegisterType<SalesPersonBO>().As<ISalesPersonBO>();
+            builder.RegisterType<SalesPersonDO>().As<ISalesPersonDO>();
+            builder.RegisterType<MSSQLDatabase>().As<IDatabase>();
+            //builder.RegisterType<Action<MSSQLDatabase>>().As<IDatabase>();
 
             // Once you're done registering things, set the container
             // provider up with your registrations.

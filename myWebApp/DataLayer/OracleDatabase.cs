@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using myWebApp.DataLayer;
+using System.Data;
+using Oracle.ManagedDataAccess.Client;
 
 namespace myWebApp.DataLayer
 {
@@ -10,6 +12,7 @@ namespace myWebApp.DataLayer
     {
         private string Vendor = "Oracle";
         private string Version = "19c";
+        public IDbConnection _conn { set; get; }
 
         public void Connect()
         {
