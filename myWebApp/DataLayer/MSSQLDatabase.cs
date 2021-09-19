@@ -5,6 +5,7 @@ using System.Web;
 using myWebApp.DataLayer;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace myWebApp.DataLayer
 {
@@ -12,12 +13,14 @@ namespace myWebApp.DataLayer
     {
         private string Vendor = "MSSQL";
         private string Version = "2016 SP2";
-        private string connStr = "Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
+        private string connStr = ""; //"Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
         public IDbConnection _conn { set; get; }
 
         public MSSQLDatabase()
         {
             Console.WriteLine("Constructor");
+
+            connStr = ConfigurationManager.AppSettings["DbConnectionString"];
             if (_conn == null)
             {
                 try

@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Reflection;
 using myWebApp.BusinessLayer;
 using myWebApp.DataLayer;
+using System.Diagnostics;
+using System.Configuration;
+using myWebApp.Model;
 
 namespace myWebApp.Pages
 {
@@ -16,6 +19,7 @@ namespace myWebApp.Pages
         public ISalesPersonBO _salesPersonBO { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ASP.NET Server Controls - https://docs.microsoft.com/en-us/troubleshoot/aspnet/server-controls
             Label1.Text = "(Precompiled): Page_Load fired!";
             Label1.Text += ToString();
             Label1.Text += Request.UserAgent;
@@ -35,21 +39,29 @@ namespace myWebApp.Pages
                 var data = _salesPersonBO.GetSalesPersonData();
                 if (data is null)
                 {
-                    Console.WriteLine("Oops");
+                    Debug.WriteLine("Oops");
                 }
                 else
                 {
-                    Console.WriteLine(data.Count);
-                    Label2.Text = data.Count.ToString();
-
+                    Debug.WriteLine(data.Count());
+                    Label1.Text += $"\nThere are {data.Count()} records in xxx table.";
+                    GridViewSalesPerson.DataSource = data;
+                    GridViewSalesPerson.DataBind();
                 }
             }
             var token = HttpContext.Current.Request.QueryString.Get("token");
+            lblSessionId.Text = HttpContext.Current.Session.SessionID;
+            lblServiceID.Text = ConfigurationManager.AppSettings["ServiceID"];
+        }
+
+        public List<SalesPerson> GetSalesPerson()
+        {
+            return _salesPersonBO.GetSalesPersonData();
         }
         protected void Page_UnLoad(object sender, EventArgs e)
         {
             //_database.Disconnect();
-            Console.WriteLine("UnLoad");
+            Debug.WriteLine("UnLoad");
         }
 
         private string fname = "Martin";
