@@ -15,6 +15,15 @@ namespace myWebApp.Pages
     {
 
         /// <summary>
+        /// MyHyperLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink MyHyperLink;
+
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace myWebApp.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewSalesPerson;
+
+        /// <summary>
+        /// Table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
 
         /// <summary>
         /// GV2 control.

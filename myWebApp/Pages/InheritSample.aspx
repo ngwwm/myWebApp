@@ -24,15 +24,19 @@
                   <td>HTTP_HOST: </td>
                   <td><%= Request.ServerVariables["HTTP_HOST"] %></td>
             </tr>
+              <tr>
+                  <td>Google Auth</td>
+                  <td>
+                    <asp:HyperLink ID="MyHyperLink" runat="server" NavigateUrl="https://google.com" Target="_blank">HyperLink</asp:HyperLink>
+                  </td>
+              </tr>
       </table>
 
     <form id="form1" runat="server">
         <div>Hello World!
         </div>
         <div>
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        </div>
-        <div>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </div>
         <asp:GridView ID="GridViewSalesPerson" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
@@ -47,9 +51,11 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+        <asp:Table ID="Table1" runat="server">
+        </asp:Table>
         <asp:GridView ID="GV2" runat="server" ItemType="myWebApp.Model.SalesPerson"
             selectMethod="GetSalesPerson"></asp:GridView>
-        <asp:Button ID="Button1" runat="server" Text="Button" />
+        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
     </form>
                 <table style="width:100%;">
                     <tr>

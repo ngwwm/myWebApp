@@ -11,6 +11,16 @@ using System.Diagnostics;
 using System.Configuration;
 using myWebApp.Model;
 
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace myWebApp.Pages
 {
     public partial class InheritSample : System.Web.UI.Page
@@ -24,10 +34,16 @@ namespace myWebApp.Pages
             Label1.Text += ToString();
             Label1.Text += Request.UserAgent;
             //Label1.Text += _database.GetVersion();
+            //https://developers.google.com/identity/protocols/oauth2/web-server#httprest
+            var GoogleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar&redirect_uri=http://localhost:52353/Pages/InheritSample.aspx&response_type=code&client_id=439132826761-v3kv4s8gcqj0dneaelrd9mtbderaitd2.apps.googleusercontent.com&access_type=offline&prompt=consent";
+
+            MyHyperLink.NavigateUrl = GoogleAuthUrl;
 
             CreateAssembly();
 
             ListSalesPersons();
+            var code = HttpContext.Current.Request.QueryString.Get("code");
+            //MyWebAppGoogleCalendarIntegration();
         }
 
         private void ListSalesPersons()
@@ -77,6 +93,75 @@ namespace myWebApp.Pages
                 object db = Activator.CreateInstance(Assembly.GetExecutingAssembly().GetType("myWebApp.DataLayer.IDatabase)"));
             }
             */
+        }
+
+
+        // If modifying these scopes, delete your previously saved credentials
+        // at ~/.credentials/calendar-dotnet-quickstart.json
+        static string[] Scopes = { CalendarService.Scope.CalendarEvents, CalendarService.Scope.CalendarReadonly };
+        static string ApplicationName = "Google Calendar API .NET Quickstart";
+
+        static void MyWebAppGoogleCalendarIntegration() 
+        {
+            string AppPath = System.Web.HttpRuntime.AppDomainAppPath;
+            UserCredential credential;
+
+            using (var stream =
+                    new FileStream(AppPath + "\\credentials.json", FileMode.Open, FileAccess.Read))
+            {
+                // The file token.json stores the user's access and refresh tokens, and is created
+                // automatically when the authorization flow completes for the first time.
+                string credPath = AppPath + "\\token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.FromStream(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)
+                        ).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+
+            // Create Google Calendar API service.
+            var service = new CalendarService(new BaseClientService.Initializer()
+            {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+            });
+
+            // Define parameters of request.
+            EventsResource.ListRequest request = service.Events.List("primary");
+            request.TimeMin = DateTime.Now;
+            request.ShowDeleted = false;
+            request.SingleEvents = true;
+            request.MaxResults = 10;
+            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+            // List events.
+            Events events = request.Execute();
+            Console.WriteLine("Upcoming events:");
+            if (events.Items != null && events.Items.Count > 0)
+            {
+                    foreach (var eventItem in events.Items)
+                    {
+                        string when = eventItem.Start.DateTime.ToString();
+                        if (String.IsNullOrEmpty(when))
+                        {
+                            when = eventItem.Start.Date;
+                        }
+                        Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                    }
+            }
+            else
+            {
+                Console.WriteLine("No upcoming events found.");
+            }
+            Console.Read();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            MyWebAppGoogleCalendarIntegration();
         }
     }
 }
