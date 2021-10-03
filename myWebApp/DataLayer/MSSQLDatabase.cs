@@ -6,10 +6,11 @@ using myWebApp.DataLayer;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace myWebApp.DataLayer
 {
-    public class MSSQLDatabase : IDatabase, IDisposable
+    public class MSSQLDatabase : IRDBMSDatabase, IDisposable
     {
         private string Vendor = "MSSQL";
         private string Version = "2016 SP2";
@@ -29,14 +30,14 @@ namespace myWebApp.DataLayer
                     _conn.Open();
                 } catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                 }
             }
         }
 
         public void Connect()
         {
-            Console.WriteLine("_connected");
+            Debug.WriteLine("_connected");
         }
         public void Connect(string connectionString)
         {

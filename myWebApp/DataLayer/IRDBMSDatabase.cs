@@ -7,7 +7,7 @@ using System.Data;
 
 namespace myWebApp.DataLayer
 {
-    public interface IDatabase 
+    public interface IRDBMSDatabase 
     {
         IDbConnection _conn { get; set; }
 

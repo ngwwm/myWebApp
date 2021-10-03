@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
@@ -9,10 +10,11 @@ using System.Web.SessionState;
 using Autofac;
 using Autofac.Configuration;
 using Autofac.Integration.Web;
-using Microsoft.Extensions.Configuration;
 using myWebApp.BusinessLayer;
 using myWebApp.DataAccessLayer.Sales;
+using myWebApp.DataAccessLayer.StackOverflow;
 using myWebApp.DataLayer;
+using StackExchange.Redis;
 
 namespace myWebApp
 {
@@ -33,7 +35,7 @@ namespace myWebApp
         void Application_Start(object sender, EventArgs e)
         {
             // Add the configuration to the ConfigurationBuilder.
-            var config = new ConfigurationBuilder();
+            var config = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
             // config.AddJsonFile comes from Microsoft.Extensions.Configuration.Json
             // config.AddXmlFile comes from Microsoft.Extensions.Configuration.Xml
             //config.AddJsonFile("autofac.json");
@@ -50,8 +52,15 @@ namespace myWebApp
             var builder = new ContainerBuilder();
             builder.RegisterType<SalesPersonBO>().As<ISalesPersonBO>();
             builder.RegisterType<SalesPersonDO>().As<ISalesPersonDO>();
-            builder.RegisterType<MSSQLDatabase>().As<IDatabase>();
+            builder.RegisterType<UserBO>().As<IUserBO>();
+            builder.RegisterType<UserDO>().As<IUserDO>();
+            builder.RegisterType<MSSQLDatabase>().As<DataLayer.IRDBMSDatabase>();
             //builder.RegisterType<Action<MSSQLDatabase>>().As<IDatabase>();
+
+            var cacheConnStr = ConfigurationManager.AppSettings["CacheConnectionString"];
+
+            builder.Register<IConnectionMultiplexer>(c =>
+                ConnectionMultiplexer.Connect(cacheConnStr)).SingleInstance();
 
             // Once you're done registering things, set the container
             // provider up with your registrations.

@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using myWebApp.DataAccessLayer.Sales;
 using myWebApp.Model;
 using myWebApp.DataLayer;
+using StackExchange.Redis;
 
 namespace myWebApp.BusinessLayer
 {
@@ -16,16 +17,20 @@ namespace myWebApp.BusinessLayer
         //public IDatabase _db { get; set; }
 
         public ISalesPersonDO _salesPersonDO { get; set; }
-
-        public SalesPersonBO(ISalesPersonDO salesPersonDO)
+        public IConnectionMultiplexer _redisCache { get; set; }
+        public SalesPersonBO(ISalesPersonDO salesPersonDO, IConnectionMultiplexer redisCache)
         {
             Console.WriteLine("SalesPersonBO Ctor");
             _salesPersonDO = salesPersonDO;
+            _redisCache = redisCache;
         }
         public List<SalesPerson> GetSalesPersonData()
         {
             //var salesPersonDO = new SalesPersonDO();
             var list = new List<SalesPerson>();
+
+            var db = _redisCache.GetDatabase();
+            var foo = db.StringGet("foo");
 
             using (IDataReader sdr = _salesPersonDO.GetSalesPersonDataReader())
             {

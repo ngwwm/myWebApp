@@ -37,6 +37,16 @@
                 <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
             </p>
         </div>
+        <div class="col-md-4">
+            <h2>Sample</h2>
+            <p>
+                Samples
+            </p>
+            <p>
+                <a class="btn btn-default" href="/Pages/InheritSample.aspx">InheritSample</a>
+                <a class="btn btn-default" href="/Pages/StackOverflowUsers.aspx">StackOverflow Users</a>
+            </p>
+        </div>
     </div>
 
 </asp:Content>

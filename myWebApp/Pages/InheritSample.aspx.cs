@@ -20,13 +20,15 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using StackExchange.Redis;
 
 namespace myWebApp.Pages
 {
     public partial class InheritSample : System.Web.UI.Page
     {
-        public IDatabase _database { get; set; }
+        public IRDBMSDatabase _database { get; set; }
         public ISalesPersonBO _salesPersonBO { get; set; }
+        public IConnectionMultiplexer _redisConn { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             //ASP.NET Server Controls - https://docs.microsoft.com/en-us/troubleshoot/aspnet/server-controls
@@ -161,7 +163,13 @@ namespace myWebApp.Pages
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            MyWebAppGoogleCalendarIntegration();
+            //MyWebAppGoogleCalendarIntegration();
+            IDatabase db = _redisConn.GetDatabase();
+            string value = "xxxxxxx";
+            db.StringSet("foo", value);
+            
+            value = db.StringGet("foo");
+            Debug.WriteLine(value); // writes: "abcdefg"
         }
     }
 }

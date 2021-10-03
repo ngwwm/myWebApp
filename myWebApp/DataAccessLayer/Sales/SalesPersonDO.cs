@@ -11,9 +11,9 @@ namespace myWebApp.DataAccessLayer.Sales
 {
     public class SalesPersonDO : ISalesPersonDO
     {
-        public IDatabase _db { get; set; }
+        public IRDBMSDatabase _db { get; set; }
 
-        public SalesPersonDO(IDatabase db)
+        public SalesPersonDO(IRDBMSDatabase db)
         {
             Console.WriteLine("SalesPersonDO Ctor");
             _db = db;

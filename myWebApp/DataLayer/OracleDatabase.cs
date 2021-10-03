@@ -8,7 +8,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace myWebApp.DataLayer
 {
-    public class OracleDatabase : IDatabase
+    public class OracleDatabase : IRDBMSDatabase
     {
         private string Vendor = "Oracle";
         private string Version = "19c";
