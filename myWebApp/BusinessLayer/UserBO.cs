@@ -53,9 +53,13 @@ namespace myWebApp.BusinessLayer
                 }
             } else
             {
-                foreach (var i in new List<string>() {"-1","1","2","3","4","5","8","9","10","11"} )
+                var keys = _redisConn.GetServer(_redisConn.GetEndPoints()
+                        .First())
+                        .Keys(pattern: "*").ToList();
+
+                foreach (var k in keys)
                 {
-                    StackOverflowUser p = Newtonsoft.Json.JsonConvert.DeserializeObject<StackOverflowUser>(db.StringGet(i));
+                    StackOverflowUser p = Newtonsoft.Json.JsonConvert.DeserializeObject<StackOverflowUser>(db.StringGet(k.ToString()));
                     list.Add(p);
                 }
                 return list;
