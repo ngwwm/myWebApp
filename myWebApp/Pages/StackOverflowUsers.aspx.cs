@@ -15,6 +15,7 @@ namespace myWebApp.Pages
         public IUserBO _userBO { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            myLogger.myLog.mlog.Info("StackOverflowUsers Page_Load.");
             Debug.WriteLine("Page_Load: StackOverflowUsers");
         }
 
