@@ -13,6 +13,7 @@ using Autofac.Integration.Web;
 using myWebApp.BusinessLayer;
 using myWebApp.DataAccessLayer.Sales;
 using myWebApp.DataAccessLayer.StackOverflow;
+using myWebApp.DataAccessLayer.SubDomains;
 using myWebApp.DataLayer;
 using StackExchange.Redis;
 
@@ -52,15 +53,20 @@ namespace myWebApp
             var builder = new ContainerBuilder();
             builder.RegisterType<SalesPersonBO>().As<ISalesPersonBO>();
             builder.RegisterType<SalesPersonDO>().As<ISalesPersonDO>();
+            builder.RegisterType<SubDomainBO>().As<ISubDomainBO>();
+            builder.RegisterType<SubDomainDO>().As<ISubDomainDO>();
             builder.RegisterType<UserBO>().As<IUserBO>();
             builder.RegisterType<UserDO>().As<IUserDO>();
+            builder.RegisterType<MSSQLDatabase>().As<DataLayer.IRDBMSDatabase>();
             builder.RegisterType<MSSQLDatabase>().As<DataLayer.IRDBMSDatabase>();
             //builder.RegisterType<Action<MSSQLDatabase>>().As<IDatabase>();
 
             var cacheConnStr = ConfigurationManager.AppSettings["CacheConnectionString"];
 
+            /*
             builder.Register<IConnectionMultiplexer>(c =>
                 ConnectionMultiplexer.Connect(cacheConnStr)).SingleInstance();
+            */
 
             // Once you're done registering things, set the container
             // provider up with your registrations.

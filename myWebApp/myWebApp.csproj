@@ -274,6 +274,9 @@
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Pages\InheritSample.aspx" />
+    <Content Include="Pages\SubDomains.aspx">
+      <BrowseToURL>~/Pages/SubDomains.aspx</BrowseToURL>
+    </Content>
     <Content Include="Pages\StackOverflowUsers.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -319,9 +322,11 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BusinessLayer\ISubDomainBO.cs" />
     <Compile Include="BusinessLayer\ISalesPersonBO.cs" />
     <Compile Include="BusinessLayer\IUserBO.cs" />
     <Compile Include="BusinessLayer\SalesPersonBO.cs" />
+    <Compile Include="BusinessLayer\SubDomainBO.cs" />
     <Compile Include="BusinessLayer\UserBO.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -335,6 +340,8 @@
     <Compile Include="DataAccessLayer\Sales\SalesPersonDO.cs" />
     <Compile Include="DataAccessLayer\StackOverflow\IUserDO.cs" />
     <Compile Include="DataAccessLayer\StackOverflow\UserDO.cs" />
+    <Compile Include="DataAccessLayer\SubDomains\ISubDomainDO.cs" />
+    <Compile Include="DataAccessLayer\SubDomains\SubDomainDO.cs" />
     <Compile Include="DataLayer\IRDBMSDatabase.cs" />
     <Compile Include="DataLayer\MSSQLDatabase.cs" />
     <Compile Include="DataLayer\OracleDatabase.cs" />
@@ -350,6 +357,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interface\Dependency.cs" />
+    <Compile Include="Model\ReservedSubDomain.cs" />
     <Compile Include="Model\SalesPerson.cs" />
     <Compile Include="Model\StackOverflowUser.cs" />
     <Compile Include="Pages\InheritSample.aspx.cs">
@@ -358,6 +366,13 @@
     </Compile>
     <Compile Include="Pages\InheritSample.aspx.designer.cs">
       <DependentUpon>InheritSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SubDomains.aspx.cs">
+      <DependentUpon>SubDomains.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SubDomains.aspx.designer.cs">
+      <DependentUpon>SubDomains.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\StackOverflowUsers.aspx.cs">
       <DependentUpon>StackOverflowUsers.aspx</DependentUpon>
