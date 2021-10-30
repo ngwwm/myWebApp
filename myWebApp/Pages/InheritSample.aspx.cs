@@ -21,16 +21,20 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
+using myLogger;
 
 namespace myWebApp.Pages
 {
     public partial class InheritSample : System.Web.UI.Page
     {
+
         public IRDBMSDatabase _database { get; set; }
         public ISalesPersonBO _salesPersonBO { get; set; }
         public IConnectionMultiplexer _redisConn { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            myLog.mlog.Info("InheritSample Page_Load.");
+
             //ASP.NET Server Controls - https://docs.microsoft.com/en-us/troubleshoot/aspnet/server-controls
             Label1.Text = "(Precompiled): Page_Load fired!";
             Label1.Text += ToString();
