@@ -46,7 +46,8 @@
                 <a class="btn btn-default" href="/Pages/InheritSample.aspx">InheritSample</a>
                 <a class="btn btn-default" href="/Pages/StackOverflowUsers.aspx">StackOverflow Users</a>
                 <a class="btn btn-default" href="/Pages/SubDomains.aspx">SubDomains</a>
-                <asp:Button ID="btnUnhandled" runat="server" OnClick="btnUnhandled_Click1" Text="ThrowException" />
+                <asp:Button ID="btnUnhandled" runat="server" OnClick="btnUnhandled_Click" Text="Exception is not handled" />
+                <asp:Button ID="btnHandled" runat="server" OnClick="btnHandled_Click" Text="Exception is handled" />
             </p>
         </div>
     </div>
