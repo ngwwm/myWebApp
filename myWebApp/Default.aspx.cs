@@ -18,7 +18,7 @@ namespace myWebApp
         protected void btnUnhandled_Click1(object sender, EventArgs e)
         {
             // Queue the task.
-                ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadProc));
+            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadProc));
 
             // The Sleep gives the background thread time to run
             Thread.Sleep(1000);
@@ -29,6 +29,7 @@ namespace myWebApp
         {
             Thread sendApplicantMail = new Thread(delegate ()
             {
+                throw (new Exception("ERROR Test Unhandled exception 0"));
                 try
                 {
                     try
