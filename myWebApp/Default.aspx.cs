@@ -77,7 +77,7 @@ namespace myWebApp
                 {
                     myLog.mlog.Info("ThreadProc() Start Thread - sendApplicantMail Start.");
                     myLog.mlog.Info("ThreadProc() Start Thread - sendApplicantMail Wait for 5 seconds Start.");
-                    Thread.Sleep(25000);
+                    Thread.Sleep(5000);
                     myLog.mlog.Info("ThreadProc() Start Thread - sendApplicantMail Doing Something after Wait for 5 seconds End.");
                     myLog.mlog.Info("ThreadProc() Start Thread - sendApplicantMail Doing Something after Wait for 5 seconds End.");
                     myLog.mlog.Info("ThreadProc() Start Thread - sendApplicantMail Doing Something after Wait for 5 seconds End.");

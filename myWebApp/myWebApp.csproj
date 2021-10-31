@@ -427,7 +427,7 @@
       <Name>myLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebMonitor\WebMonitor.csproj">
-      <Project>{9bcc956f-5624-4baf-a4a3-5520610a1d74}</Project>
+      <Project>{ef6d5a03-0505-47e5-acef-47d813de2072}</Project>
       <Name>WebMonitor</Name>
     </ProjectReference>
   </ItemGroup>
