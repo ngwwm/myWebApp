@@ -426,6 +426,10 @@
       <Project>{6a5bb7fa-05cb-4319-be1a-14a599098fb1}</Project>
       <Name>myLogger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebMonitor\WebMonitor.csproj">
+      <Project>{9bcc956f-5624-4baf-a4a3-5520610a1d74}</Project>
+      <Name>WebMonitor</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
