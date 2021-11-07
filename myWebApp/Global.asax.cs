@@ -64,10 +64,10 @@ namespace myWebApp
 
             var cacheConnStr = ConfigurationManager.AppSettings["CacheConnectionString"];
 
-            /*
+            
             builder.Register<IConnectionMultiplexer>(c =>
                 ConnectionMultiplexer.Connect(cacheConnStr)).SingleInstance();
-            */
+            
 
             // Once you're done registering things, set the container
             // provider up with your registrations.

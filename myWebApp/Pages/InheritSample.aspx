@@ -5,6 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            height: 24px;
+        }
+    </style>
 </head>
 <body>
           <table>
@@ -31,7 +36,29 @@
                   </td>
               </tr>
       </table>
-
+               <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style1">SessionID</td>
+                        <td class="auto-style1">
+                            <asp:Label ID="lblSessionId" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GUID</td>
+                        <td>
+                            <asp:Label ID="lblGuid" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    <tr>
+                        <td>ServiceID&nbsp;</td>
+                        <td>
+                            <asp:Label ID="lblServiceID" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td> </td>
+                    </tr>
+                </table>
     <form id="form1" runat="server">
         <div>Hello World!
         </div>
@@ -57,23 +84,6 @@
             selectMethod="GetSalesPerson"></asp:GridView>
         <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
     </form>
-                <table style="width:100%;">
-                    <tr>
-                        <td>SessionID</td>
-                        <td>
-                            <asp:Label ID="lblSessionId" runat="server" Text="Label"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ServiceID&nbsp;</td>
-                        <td>
-                            <asp:Label ID="lblServiceID" runat="server" Text="Label"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td> </td>
-                    </tr>
-                </table>
+ 
 </body>
 </html>

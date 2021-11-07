@@ -22,6 +22,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using myLogger;
+using System.Web.SessionState;
 
 namespace myWebApp.Pages
 {
@@ -35,6 +36,26 @@ namespace myWebApp.Pages
         {
             myLog.mlog.Info("InheritSample Page_Load.");
 
+            var guid = Guid.NewGuid();
+
+            if (HttpContext.Current.Session["Guid"] == null) 
+            {
+                /*
+                SessionIDManager manager = new SessionIDManager();
+                string newSessionId = manager.CreateSessionID(HttpContext.Current);
+                bool isRedir = false;
+                bool isAdded = false;
+                HttpContext.Current.Session["guid"] = guid;
+                manager.SaveSessionID(HttpContext.Current, newSessionId, out isRedir, out isAdded);
+                myLog.mlog.Debug($"InheritSample Session New/Expired - new sessionId: {newSessionId}");
+                */
+                HttpContext.Current.Session["Guid"] = guid;
+                myLog.mlog.Info($"InheritSample Session New/Expired - Guid: {guid}");
+            }
+            else
+            {
+                myLog.mlog.Info($"InheritSample Session Exists - Guid: {guid}");
+            }
             //ASP.NET Server Controls - https://docs.microsoft.com/en-us/troubleshoot/aspnet/server-controls
             Label1.Text = "(Precompiled): Page_Load fired!";
             Label1.Text += ToString();
@@ -73,6 +94,7 @@ namespace myWebApp.Pages
             }
             var token = HttpContext.Current.Request.QueryString.Get("token");
             lblSessionId.Text = HttpContext.Current.Session.SessionID;
+            lblGuid.Text = HttpContext.Current.Session["Guid"].ToString();
             lblServiceID.Text = ConfigurationManager.AppSettings["ServiceID"];
         }
 

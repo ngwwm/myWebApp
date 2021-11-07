@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using myLogger;
 
 namespace myWebApp.DataLayer
 {
@@ -31,6 +32,11 @@ namespace myWebApp.DataLayer
                 } catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
+                    myLog.mlog.Error(ex.Message);
+                }
+                finally
+                {
+                    myLog.mlog.Debug("MSSQLDatabase: connection opened.");
                 }
             }
         }
