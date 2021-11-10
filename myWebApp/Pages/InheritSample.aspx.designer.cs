@@ -24,6 +24,24 @@ namespace myWebApp.Pages
         protected global::System.Web.UI.WebControls.HyperLink MyHyperLink;
 
         /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
+        /// lblServerIP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServerIP;
+
+        /// <summary>
         /// lblSessionId control.
         /// </summary>
         /// <remarks>
@@ -51,13 +69,13 @@ namespace myWebApp.Pages
         protected global::System.Web.UI.WebControls.Label lblServiceID;
 
         /// <summary>
-        /// form1 control.
+        /// btnUnhandled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Button btnUnhandled;
 
         /// <summary>
         /// Label1 control.

@@ -36,7 +36,14 @@
                   </td>
               </tr>
       </table>
+    <form id="form1" runat="server">
                <table style="width:100%;">
+                    <tr>
+                        <td class="auto-style1">ServerIP</td>
+                        <td class="auto-style1">
+                            <asp:Label ID="lblServerIP" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="auto-style1">SessionID</td>
                         <td class="auto-style1">
@@ -59,8 +66,8 @@
                         <td> </td>
                     </tr>
                 </table>
-    <form id="form1" runat="server">
         <div>Hello World!
+        <asp:Button ID="btnUnhandled" runat="server" Text="Raise Unhandled Exception" OnClick="btnUnhandled_Click" />
         </div>
         <div>
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

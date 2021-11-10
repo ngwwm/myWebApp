@@ -22,7 +22,7 @@ namespace myWebApp.DataAccessLayer.Sales
         public IDataReader GetSalesPersonDataReader()
         {
 
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM [Sales].[vSalesPerson]", (SqlConnection)_db._conn))
+            using (SqlCommand cmd = new SqlCommand("select top 10 UserId as BusinessEntityID, 'Mr' as Title, FirstName, LastName, 9.99 as SalesYTD FROM[User].[LoginDetail]", (SqlConnection)_db._conn))
             {
                 List<SalesPerson> salesPersons = new List<SalesPerson>();
                 cmd.CommandType = CommandType.Text;

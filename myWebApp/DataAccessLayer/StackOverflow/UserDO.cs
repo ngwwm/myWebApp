@@ -17,9 +17,9 @@ namespace myWebApp.DataAccessLayer.StackOverflow
         }
         public IDataReader GetDataReader()
         {
-            string stmt = @"SELECT top 10 Id, DisplayName, Location, UpVotes, DownVotes, 
-                            CreationDate, LastAccessDate, Reputation, Views, WebsiteUrl 
-                            FROM dbo.Users order by Upvotes desc";
+            string stmt = @"select top 10 UserId as Id, FirstName as DisplayName, LastName as Location, CTUserStatus as UpVotes, CTAccessOn as DownVotes, 
+                            CreatedDtm as CreationDate, UpdatedDtm as LastAccessDate, 0 as Reputation, 0 as Views, EmailId as WebsiteUrl 
+                            FROM [User].[LoginDetail]";
 
             using (SqlCommand cmd = new SqlCommand(stmt, (SqlConnection)_db._conn))
             {
