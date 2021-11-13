@@ -36,6 +36,7 @@ namespace myWebApp
 
         void Application_Start(object sender, EventArgs e)
         {
+            Thread.Sleep(5000);
             // Add the configuration to the ConfigurationBuilder.
             var config = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
             // config.AddJsonFile comes from Microsoft.Extensions.Configuration.Json

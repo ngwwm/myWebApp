@@ -11,7 +11,7 @@
         }
     </style>
 </head>
-<body>
+<body id="pagebody" runat="server">
           <table>
             <tr>
                   <th>Server Variable</th>
@@ -45,20 +45,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="auto-style1">SessionID</td>
+                        <td class="auto-style1">Server Time</td>
+                        <td class="auto-style1">
+                            <asp:Label ID="lblServerTime" runat="server" Text="Label" Font-Size="X-Large"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style1">ServerID (Cookie)</td>
+                        <td class="auto-style1">
+                            <asp:Label ID="lblCookieServerID" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style1">SessionID (Cookie&Session)</td>
                         <td class="auto-style1">
                             <asp:Label ID="lblSessionId" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td>GUID</td>
+                        <td>GUID (Session)</td>
                         <td>
                             <asp:Label ID="lblGuid" runat="server" Text="Label"></asp:Label>
                         </td>
+                    </tr>
                     <tr>
-                        <td>ServiceID&nbsp;</td>
+                        <td>Cookies</td>
                         <td>
-                            <asp:Label ID="lblServiceID" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="lblCookies" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>

@@ -15,6 +15,15 @@ namespace myWebApp.Pages
     {
 
         /// <summary>
+        /// pagebody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pagebody;
+
+        /// <summary>
         /// MyHyperLink control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,24 @@ namespace myWebApp.Pages
         protected global::System.Web.UI.WebControls.Label lblServerIP;
 
         /// <summary>
+        /// lblServerTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServerTime;
+
+        /// <summary>
+        /// lblCookieServerID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCookieServerID;
+
+        /// <summary>
         /// lblSessionId control.
         /// </summary>
         /// <remarks>
@@ -60,13 +87,13 @@ namespace myWebApp.Pages
         protected global::System.Web.UI.WebControls.Label lblGuid;
 
         /// <summary>
-        /// lblServiceID control.
+        /// lblCookies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblServiceID;
+        protected global::System.Web.UI.WebControls.Label lblCookies;
 
         /// <summary>
         /// btnUnhandled control.

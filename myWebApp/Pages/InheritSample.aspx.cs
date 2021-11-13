@@ -23,6 +23,8 @@ using System.Threading.Tasks;
 using StackExchange.Redis;
 using myLogger;
 using System.Web.SessionState;
+using System.Net;
+using System.Drawing;
 
 namespace myWebApp.Pages
 {
@@ -48,8 +50,17 @@ namespace myWebApp.Pages
                 HttpContext.Current.Session["guid"] = guid;
                 manager.SaveSessionID(HttpContext.Current, newSessionId, out isRedir, out isAdded);
                 myLog.mlog.Debug($"InheritSample Session New/Expired - new sessionId: {newSessionId}");
+                var cookieName = ConfigurationManager.AppSettings["CookieName"];
+                if (String.IsNullOrEmpty(cookieName))
+                    cookieName = "ASP.NET_SessionId";
                 */
+
                 guid = Guid.NewGuid();
+                /*
+                Abandon the previous session if any.
+                HttpContext.Current.Session.Abandon();
+                Response.Cookies.Add(new HttpCookie(cookieName, ""));
+                */
                 HttpContext.Current.Session["Guid"] = guid;
                 myLog.mlog.Info($"InheritSample Session New/Expired - Guid: {guid}");
             }
@@ -70,8 +81,21 @@ namespace myWebApp.Pages
             CreateAssembly();
 
             ListSalesPersons();
-            var code = HttpContext.Current.Request.QueryString.Get("code");
+            var color = HttpContext.Current.Request.QueryString.Get("c");
             //MyWebAppGoogleCalendarIntegration();
+            pagebody.Attributes.Add("bgcolor", color);
+
+            lblServerTime.BackColor = (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString.Get("e"))) ? lblServerTime.BackColor : RandColor();
+        }
+
+        private Color RandColor()
+        {
+            Random rand = new Random();
+            int max = byte.MaxValue + 1; // 256
+            int r = rand.Next(max);
+            int g = rand.Next(max);
+            int b = rand.Next(max);
+            return Color.FromArgb(r, g, b);
         }
 
         private void ListSalesPersons()
@@ -96,8 +120,18 @@ namespace myWebApp.Pages
             var token = HttpContext.Current.Request.QueryString.Get("token");
             lblSessionId.Text = HttpContext.Current.Session.SessionID;
             lblServerIP.Text = HttpContext.Current.Request["LOCAL_ADDR"];
+            lblServerTime.Text = DateTime.Now.ToString();
             lblGuid.Text = HttpContext.Current.Session["Guid"].ToString();
-            lblServiceID.Text = ConfigurationManager.AppSettings["ServiceID"];
+            /*lblServiceID.Text = ConfigurationManager.AppSettings["ServiceID"];*/
+            var serverID = HttpContext.Current.Request.Cookies["ServerID"];
+            lblCookieServerID.Text = (serverID == null) ? "" : serverID.ToString();
+            var cookies = "";
+            foreach (var cookiekey in HttpContext.Current.Request.Cookies.AllKeys)
+            {
+                cookies += $"{cookiekey}={HttpContext.Current.Request.Cookies[cookiekey].Value}";
+            }
+            lblCookies.Text = cookies;
+            myLog.mlog.Debug(cookies);
         }
 
         public List<SalesPerson> GetSalesPerson()
@@ -192,13 +226,20 @@ namespace myWebApp.Pages
         protected void Button1_Click(object sender, EventArgs e)
         {
             //MyWebAppGoogleCalendarIntegration();
-            IDatabase db = _redisConn.GetDatabase();
-            string value = "xxxxxxx";
-            db.StringSet("foo", value);
+            try
+            {
+                IDatabase db = _redisConn.GetDatabase();
+                string value = "xxxxxxx";
+                db.StringSet("foo", value);
             
-            value = db.StringGet("foo");
-            //Debug.WriteLine(value); // writes: "abcdefg"
-            myLog.mlog.Info("foo written into cache.");
+                value = db.StringGet("foo");
+                //Debug.WriteLine(value); // writes: "abcdefg"
+                myLog.mlog.Info("foo written into cache.");
+            }
+            catch (Exception ex)
+            {
+                myLog.mlog.Error("foo written into cache." + ex.Message);
+            }
         }
 
         protected void btnUnhandled_Click(object sender, EventArgs e)
