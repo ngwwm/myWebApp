@@ -105,16 +105,18 @@ namespace myWebApp.Pages
             if (_salesPersonBO != null)
             {
                 var data = _salesPersonBO.GetSalesPersonData();
-                if (data is null)
                 {
-                    Debug.WriteLine("Oops");
-                }
-                else
-                {
-                    Debug.WriteLine(data.Count());
-                    Label1.Text += $"\nThere are {data.Count()} records in xxx table.";
-                    GridViewSalesPerson.DataSource = data;
-                    GridViewSalesPerson.DataBind();
+                    if (data is null)
+                    {
+                        Debug.WriteLine("Oops");
+                    }
+                    else
+                    {
+                        Debug.WriteLine(data.Count());
+                        Label1.Text += $"\nThere are {data.Count()} records in xxx table.";
+                        GridViewSalesPerson.DataSource = data;
+                        GridViewSalesPerson.DataBind();
+                    }
                 }
             }
             var token = HttpContext.Current.Request.QueryString.Get("token");

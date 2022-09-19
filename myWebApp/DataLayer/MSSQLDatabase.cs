@@ -22,6 +22,7 @@ namespace myWebApp.DataLayer
         {
             Console.WriteLine("Constructor");
 
+            myLog.mlog.Debug("MSSQLDatabase: Acquire a database connection.");
             connStr = ConfigurationManager.AppSettings["DbConnectionString"];
             if (_conn == null)
             {
@@ -29,15 +30,15 @@ namespace myWebApp.DataLayer
                 {
                     _conn = new SqlConnection(connStr);
                     _conn.Open();
+                    myLog.mlog.Debug("MSSQLDatabase: Connection opened.");
                 } catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
-                    myLog.mlog.Error(ex.Message);
+                    myLog.mlog.Error("MSSQLDatabase: " + ex.Message);
                 }
-                finally
-                {
-                    myLog.mlog.Debug("MSSQLDatabase: connection opened.");
-                }
+            } else
+            {
+              myLog.mlog.Debug("MSSQLDatabase: Connection already opened.");
             }
         }
 

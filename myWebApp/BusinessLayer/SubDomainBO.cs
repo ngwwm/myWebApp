@@ -31,16 +31,27 @@ namespace myWebApp.BusinessLayer
                 {
                     while (dr.Read())
                     {
-                        var p = new ReservedSubDomain
+                        try
                         {
-                            SubDomain = (string)(DBNull.Value.Equals(dr["SubDomain"]) ? string.Empty : dr["SubDomain"]),
-                            CompanyId = (int)dr["CompanyId"],
-                            IsDeleted = (bool)dr["IsDeleted"],
-                            CreatedDtm = (DateTime)(DBNull.Value.Equals(dr["CreatedDtm"]) ? 0 : dr["CreatedDtm"])
-                        };
-                        //p.UpdatedDtm = (DateTime)(DBNull.Value.Equals(dr["UpdatedDtm"]) ? '19000 : dr["UpdatedDtm"]);
+                            var TotalSalary1 = dr.GetString(dr.GetOrdinal("TotalSalary"));
+                            //this will raise cast exception
+                            //var TotalSalary2 = dr.GetDecimal(dr.GetOrdinal("TotalSalary"));
+                            var p = new ReservedSubDomain
+                            {
+                                SubDomain = (string)(DBNull.Value.Equals(dr["SubDomain"]) ? string.Empty : dr["SubDomain"]),
+                                CompanyId = (int)dr["CompanyId"],
+                                IsDeleted = (bool)dr["IsDeleted"],
+                                CreatedDtm = (DateTime)(DBNull.Value.Equals(dr["CreatedDtm"]) ? 0 : dr["CreatedDtm"])
+                            };
+                            //p.UpdatedDtm = (DateTime)(DBNull.Value.Equals(dr["UpdatedDtm"]) ? '19000 : dr["UpdatedDtm"]);
 
-                        list.Add(p);
+                            list.Add(p);
+                        }
+                        catch (Exception ex)
+                        {
+                            myLogger.myLog.mlog.Error($"GetSubDomains: {ex.Message}");
+                            myLogger.myLog.mlog.Error($"GetSubDomains: {ex.StackTrace}");
+                        }
                     }
                     return list;
                 }

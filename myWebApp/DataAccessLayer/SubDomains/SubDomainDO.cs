@@ -22,7 +22,7 @@ namespace myWebApp.DataAccessLayer.SubDomains
         public IDataReader GetDataReader()
         {
 
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM [MstAppl].[ReservedSubDomain]", (SqlConnection)_db._conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT *,REPLACE(CONVERT([VARCHAR](25), CAST('24500' AS [MONEY]), 1), '.00', '') as TotalSalary FROM [MstAppl].[ReservedSubDomain]", (SqlConnection)_db._conn))
             {
                 cmd.CommandType = CommandType.Text;
                 return cmd.ExecuteReader();
