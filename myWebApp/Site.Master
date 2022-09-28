@@ -54,6 +54,8 @@
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <li><a runat="server" href="~/Contact">Hi, <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label></a></li>
+                        <li><asp:HyperLink ID="lnkLogin" runat="server" NavigateUrl="~/Pages/Login">Login</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="lnkLogout" runat="server" NavigateUrl="~/Pages/Logout">Logout</asp:HyperLink></li>
                     </ul>
                 </div>
             </div>
