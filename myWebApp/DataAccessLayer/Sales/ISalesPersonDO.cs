@@ -2,7 +2,7 @@
 
 namespace myWebApp.DataAccessLayer.Sales
 {
-    public interface ISalesPersonDO 
+    public interface ISalesPersonDO
     {
         IDataReader GetSalesPersonDataReader();
     }

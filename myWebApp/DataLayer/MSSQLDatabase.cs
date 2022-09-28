@@ -5,46 +5,35 @@ using System.Web;
 using myWebApp.DataLayer;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Diagnostics;
-using myLogger;
 
 namespace myWebApp.DataLayer
 {
-    public class MSSQLDatabase : IRDBMSDatabase, IDisposable
+    public class MSSQLDatabase : IDatabase, IDisposable
     {
         private string Vendor = "MSSQL";
         private string Version = "2016 SP2";
-        private string connStr = ""; //"Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
+        private string connStr = "Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
         public IDbConnection _conn { set; get; }
 
         public MSSQLDatabase()
         {
             Console.WriteLine("Constructor");
-
-            myLog.mlog.Debug("MSSQLDatabase: Acquire a database connection.");
-            connStr = ConfigurationManager.AppSettings["DbConnectionString"];
             if (_conn == null)
             {
                 try
                 {
                     _conn = new SqlConnection(connStr);
                     _conn.Open();
-                    myLog.mlog.Debug("MSSQLDatabase: Connection opened.");
                 } catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-                    myLog.mlog.Error("MSSQLDatabase: " + ex.Message);
+                    Console.WriteLine(ex.Message);
                 }
-            } else
-            {
-              myLog.mlog.Debug("MSSQLDatabase: Connection already opened.");
             }
         }
 
         public void Connect()
         {
-            Debug.WriteLine("_connected");
+            Console.WriteLine("_connected");
         }
         public void Connect(string connectionString)
         {
