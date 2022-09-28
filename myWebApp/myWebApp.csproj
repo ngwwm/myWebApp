@@ -417,6 +417,7 @@
     <Content Include="Pages\Callback.aspx" />
     <Content Include="Pages\InheritSample.aspx" />
     <Content Include="Pages\Login.aspx" />
+    <Content Include="Pages\Logout.aspx" />
     <Content Include="Pages\SubDomains.aspx">
       <BrowseToURL>~/Pages/SubDomains.aspx</BrowseToURL>
     </Content>
@@ -524,6 +525,13 @@
     </Compile>
     <Compile Include="Pages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SubDomains.aspx.cs">
       <DependentUpon>SubDomains.aspx</DependentUpon>
