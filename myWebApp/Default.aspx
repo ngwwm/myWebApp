@@ -37,19 +37,6 @@
                 <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
             </p>
         </div>
-        <div class="col-md-4">
-            <h2>Sample</h2>
-            <p>
-                Samples
-            </p>
-            <p>
-                <a class="btn btn-default" href="/Pages/InheritSample.aspx">InheritSample</a>
-                <a class="btn btn-default" href="/Pages/StackOverflowUsers.aspx">StackOverflow Users</a>
-                <a class="btn btn-default" href="/Pages/SubDomains.aspx">SubDomains</a>
-                <asp:Button ID="btnUnhandled" runat="server" OnClick="btnUnhandled_Click" Text="Exception is not handled" />
-                <asp:Button ID="btnHandled" runat="server" OnClick="btnHandled_Click" Text="Exception is handled" />
-            </p>
-        </div>
     </div>
 
 </asp:Content>
