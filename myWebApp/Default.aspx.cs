@@ -15,7 +15,12 @@ namespace myWebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Default Page_Load");
+            Debug.WriteLine("Default Page_Load");
+
+            if (User.Identity.IsAuthenticated)
+            {
+                Debug.WriteLine($"User is authenicated - {User.Identity.Name}");
+            }
         }
         protected void btnUnhandled_Click(object sender, EventArgs e)
         {
