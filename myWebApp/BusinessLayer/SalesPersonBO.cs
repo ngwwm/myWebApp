@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using myWebApp.DataAccessLayer.Sales;
 using myWebApp.Model;
 using myWebApp.DataLayer;
+using StackExchange.Redis;
+using myLogger;
 
 namespace myWebApp.BusinessLayer
 {
@@ -16,34 +18,49 @@ namespace myWebApp.BusinessLayer
         //public IDatabase _db { get; set; }
 
         public ISalesPersonDO _salesPersonDO { get; set; }
-
-        public SalesPersonBO(ISalesPersonDO salesPersonDO)
+        public IConnectionMultiplexer _redisCache { get; set; }
+        public SalesPersonBO(ISalesPersonDO salesPersonDO, IConnectionMultiplexer redisCache)
         {
             Console.WriteLine("SalesPersonBO Ctor");
             _salesPersonDO = salesPersonDO;
+            _redisCache = redisCache;
         }
         public List<SalesPerson> GetSalesPersonData()
         {
+            myLog.mlog.Debug("GetSalesPersonData Enter.");
             //var salesPersonDO = new SalesPersonDO();
             var list = new List<SalesPerson>();
-
-            using (IDataReader sdr = _salesPersonDO.GetSalesPersonDataReader())
+            try
             {
-                while (sdr.Read())
+
+                var db = _redisCache.GetDatabase();
+                var foo = db.StringGet("foo");
+
+                using (IDataReader sdr = _salesPersonDO.GetSalesPersonDataReader())
                 {
-                    var p = new SalesPerson();
+                    while (sdr.Read())
+                    {
+                        var p = new SalesPerson();
 
-                    p.BusinessEntityID = (int)sdr["BusinessEntityID"];
-                    p.Title = (string)(DBNull.Value.Equals(sdr["Title"]) ? string.Empty : sdr["Title"]);
-                    p.FirstName = (string)sdr["FirstName"];
-                    p.LastName = (string)sdr["LastName"];
+                        p.BusinessEntityID = (int)sdr["BusinessEntityID"];
+                        p.Title = (string)(DBNull.Value.Equals(sdr["Title"]) ? string.Empty : sdr["Title"]);
+                        p.FirstName = (string)sdr["FirstName"];
+                        p.LastName = (string)sdr["LastName"];
 
-                    list.Add(p);
+                        list.Add(p);
+                    }
                 }
-                return list;
             }
+            catch (Exception ex)
+            {
+                myLog.mlog.Error("GetSalesPersonData Exception:" + ex.Message);
+            }
+            finally
+            {
+                myLog.mlog.Debug("GetSalesPersonData End");
+            }
+            return list;
         }
-
     }
 
 
