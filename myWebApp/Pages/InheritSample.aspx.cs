@@ -73,8 +73,13 @@ namespace myWebApp.Pages
             Label1.Text += ToString();
             Label1.Text += Request.UserAgent;
             //Label1.Text += _database.GetVersion();
+
             //https://developers.google.com/identity/protocols/oauth2/web-server#httprest
-            var GoogleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar&redirect_uri=http://localhost:52353/Pages/InheritSample.aspx&response_type=code&client_id=439132826761-v3kv4s8gcqj0dneaelrd9mtbderaitd2.apps.googleusercontent.com&access_type=offline&prompt=consent";
+
+            string GoogleClientId = ConfigurationManager.AppSettings["google:ClientId"];
+            string GoogleRedirectUri = ConfigurationManager.AppSettings["google:RedirectUri"];
+            
+            var GoogleAuthUrl = $"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar&redirect_uri={GoogleRedirectUri}&response_type=code&client_id={GoogleClientId}&access_type=offline&prompt=consent";
 
             MyHyperLink.NavigateUrl = GoogleAuthUrl;
 
