@@ -1,0 +1,26 @@
+step "run-a-docker-container-alpine" {
+    name = "Run a Docker Container - Alpine"
+    properties = {
+        Octopus.Action.TargetRoles = "web-server"
+    }
+
+    action {
+        action_type = "Octopus.DockerRun"
+        properties = {
+            Octopus.Action.Docker.NetworkType = "bridge"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "docker-io"
+            Octopus.Action.Package.PackageId = "alpine"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "Server"
+            feed = "docker-io"
+            package_id = "alpine"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
