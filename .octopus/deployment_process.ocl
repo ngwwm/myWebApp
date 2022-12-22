@@ -8,7 +8,6 @@ step "run-a-docker-container-alpine" {
         action_type = "Octopus.DockerRun"
         properties = {
             Octopus.Action.Docker.Args = "--name alpine_bash"
-            Octopus.Action.Docker.NetworkType = "bridge"
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "docker-io"
             Octopus.Action.Package.PackageId = "alpine"
