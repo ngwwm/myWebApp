@@ -4,8 +4,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- develop-octo
+  branches:
+    include:
+      - develop-octo
 
+  paths:
+    exclude:
+    - ".octopus/*"
+    - "azure-pipelines.yml"
+    
 pool:
   vmImage: 'windows-latest'
 
