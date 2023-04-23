@@ -42,9 +42,18 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    
+
+- task: ArchiveFiles@2
+  displayName: "Create webapp zip archvie file"
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\published\_PublishedWebsites\$(packageId)\'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
+
 - task: PublishBuildArtifacts@1    
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip
+    pathToPublish: $(Build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip
     artifactName: OctoPack
     publishLocation: 'Container'
