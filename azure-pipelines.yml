@@ -21,6 +21,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  packgeId: 'MyWebApp'
 
 
 steps:
@@ -33,15 +34,23 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:OutputPath=$(Build.ArtifactStagingDirectory)\published'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:OutputPath=$(Build.ArtifactStagingDirectory)\webapp'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
 
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: ArchiveFiles@2
+  displayName: "Create webapp zip archive file"
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\webapp'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1    
   inputs:
