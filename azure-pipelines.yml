@@ -43,11 +43,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: CopyFiles@2
+- task: PowerShell@2
   inputs:
-    Contents: '$(Build.ArtifactStagingDirectory)\$(packageId).zip'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip'
-
+    targetType: 'inline'
+    script: 'Move-Item  $(Build.ArtifactStagingDirectory)\$(packageId).zip $(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip'
+    
 - task: PublishBuildArtifacts@1    
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip
