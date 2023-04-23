@@ -45,11 +45,11 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: '$(Build.ArtifactStagingDirectory)\$(packgeId).zip'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\$(packgeId).$(Build.BuildNumber).zip'
+    Contents: '$(Build.ArtifactStagingDirectory)\$(packageId).zip'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip'
 
 - task: PublishBuildArtifacts@1    
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\$(packgeId).$(Build.BuildNumber).zip
+    pathToPublish: $(Build.ArtifactStagingDirectory)\$(packageId).$(Build.BuildNumber).zip
     artifactName: OctoPack
     publishLocation: 'Container'
