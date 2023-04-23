@@ -21,7 +21,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  packageId: 'MyWebApp'
+  packageId: 'myWebApp'
 
 
 steps:
