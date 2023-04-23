@@ -34,7 +34,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:OutputPath=$(Build.ArtifactStagingDirectory)\webapp'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
@@ -43,17 +43,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: ArchiveFiles@2
-  displayName: "Create webapp zip archive file"
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\webapp'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip'
-    replaceExistingArchive: true
-
 - task: PublishBuildArtifacts@1    
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\published
+    pathToPublish: $(Build.ArtifactStagingDirectory)\mywebapp.zip
     artifactName: OctoPack
     publishLocation: 'Container'
