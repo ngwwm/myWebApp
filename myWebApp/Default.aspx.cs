@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Hangfire;
 using myLogger;
 
 namespace myWebApp
@@ -135,6 +137,17 @@ namespace myWebApp
                 myLog.mlog.Error(ex.Message);
             }
             myLog.mlog.Info("ThreadProc End.");
+        }
+
+        protected void btnWebhook_Click(object sender, EventArgs e)
+        {
+            var webhookUrl = txtWebhookURL.Text;
+
+            Webhook.SayHiAsync(webhookUrl, "Online");
+
+            var jobId1 = BackgroundJob.Enqueue("webhook",
+                () => Webhook.SayHiAsync(webhookUrl, "Hangfire:Queue:webhook"));
+            var jobId2 = BackgroundJob.Enqueue(() => Webhook.SayHiAsync(webhookUrl, "Hangfire_2"));
         }
     }
 }

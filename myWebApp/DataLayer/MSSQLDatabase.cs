@@ -13,9 +13,9 @@ namespace myWebApp.DataLayer
 {
     public class MSSQLDatabase : IRDBMSDatabase, IDisposable
     {
-        private string Vendor = "MSSQL";
-        private string Version = "2016 SP2";
-        private string connStr = ""; //"Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
+        private readonly string Vendor = "MSSQL";
+        private readonly string Version = "2016 SP2";
+        private readonly string connStr = ""; //"Server=localhost;Database=AdventureWorks2019;Trusted_Connection=True; min pool size=3; Application Name=WebApp";
         public IDbConnection _conn { set; get; }
 
         public MSSQLDatabase()

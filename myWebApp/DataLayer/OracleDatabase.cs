@@ -10,8 +10,8 @@ namespace myWebApp.DataLayer
 {
     public class OracleDatabase : IRDBMSDatabase
     {
-        private string Vendor = "Oracle";
-        private string Version = "19c";
+        private readonly string Vendor = "Oracle";
+        private readonly string Version = "19c";
         public IDbConnection _conn { set; get; }
 
         public void Connect()

@@ -13,6 +13,9 @@ using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using Hangfire;
+using Hangfire.SqlServer;
+
 
 [assembly: OwinStartup(typeof(myWebApp.Startup))]
 
@@ -23,6 +26,27 @@ namespace myWebApp
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
+
+            // Configure Hangfire
+            string HangFireDbConnString = ConfigurationManager.AppSettings["HangfireDbConnectionString"];
+            GlobalConfiguration.Configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(HangFireDbConnString, new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    DisableGlobalLocks = true,
+                })
+                .WithJobExpirationTimeout(TimeSpan.FromDays(7));
+            
+            //var options = new BackgroundJobServerOptions { WorkerCount = Environment.ProcessorCount * 5 };
+            var options = new BackgroundJobServerOptions { WorkerCount = 2 };
+
+            app.UseHangfireServer(options);
 
             // Configure Auth0 parameters
             string auth0Domain = ConfigurationManager.AppSettings["auth0:Domain"];
@@ -103,5 +127,4 @@ namespace myWebApp
             });
         }
     }
-
 }
