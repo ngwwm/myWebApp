@@ -470,7 +470,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="autofac.json" />
     <Content Include="ApplicationInsights.config" />
-    <Content Include="appSettings.local.config" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>
