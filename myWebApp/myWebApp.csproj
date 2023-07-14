@@ -470,6 +470,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="autofac.json" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="appSettings.local.config" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -519,6 +520,7 @@
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
+    <None Include="Web.appSettings.local.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
