@@ -91,6 +91,7 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
+*.log.*
 *.vspscc
 *.vssscc
 .builds
@@ -362,3 +363,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /myWebApp/credentials.json
+/myWebApp/Web.appSettings.local.config

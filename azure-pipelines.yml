@@ -1,0 +1,59 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger: 
+  branches: 
+    include: 
+    - "develop"
+
+  paths:
+    exclude:
+    - ".github/*"
+    - ".octopus/*"    
+    - "azure-pipelines.yml"
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  packageId: 'myWebApp'
+
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:OutDir="$(build.artifactStagingDirectory)\published"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: ArchiveFiles@2
+  displayName: "Create webapp zip archvie file"
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\published\_PublishedWebsites\$(packageId)\'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1    
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\published\$(packageId).$(Build.BuildNumber).zip
+    artifactName: OctoPack
+    publishLocation: 'Container'
