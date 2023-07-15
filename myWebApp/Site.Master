@@ -60,9 +60,9 @@
                 </div>
             </div>
         </div>
-        <asp:Label ID="userName" runat="server" Enabled="False" Visible="True"></asp:Label>
-        <asp:Label ID="userEmail" runat="server" Enabled="False" Visible="True"></asp:Label>
-        <asp:Label ID="userHash" runat="server" Enabled="False" Visible="True"></asp:Label>
+        <asp:Label ID="userName" runat="server" Enabled="False" Visible="False"></asp:Label>
+        <asp:Label ID="userEmail" runat="server" Enabled="False" Visible="False"></asp:Label>
+        <asp:Label ID="userHash" runat="server" Enabled="False" Visible="False"></asp:Label>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
