@@ -1,9 +1,30 @@
-﻿window.intercomSettings = {
+﻿
+let MyWebApp = { name: '', email: '', hash: '' };
+
+
+window.intercomSettings = {
     api_base: "https://api-iam.intercom.io",
     app_id: "aah8u1xq",
-//    email: "customer@example.com", // Email address
-//    user_hash: "INSERT_HMAC_VALUE_HERE" // HMAC using SHA-256
+    //email: MyWebApp.email, // Email address
+    //user_hash: MyWebApp.hash // HMAC using SHA-256
 };
+
+(function () {
+    let e0 = document.getElementById('userName');
+    MyWebApp.name = e0.textContent;
+
+    if (MyWebApp.name !== '') window.intercomSettings.name = MyWebApp.name;
+
+    let e1 = document.getElementById('userEmail');
+    MyWebApp.email = e1.textContent;
+
+    if (MyWebApp.email !== '') window.intercomSettings.email = MyWebApp.email;
+
+    let e2 = document.getElementById('userHash');
+    MyWebApp.hash = e2.textContent;
+
+    if (MyWebApp.hash !== '') window.intercomSettings.user_hash = MyWebApp.hash;
+})();
 
 // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/aah8u1xq'
 (function () {
