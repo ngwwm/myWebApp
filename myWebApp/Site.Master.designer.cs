@@ -42,6 +42,33 @@ namespace myWebApp
         protected global::System.Web.UI.WebControls.HyperLink lnkLogout;
 
         /// <summary>
+        /// userName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userName;
+
+        /// <summary>
+        /// userEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userEmail;
+
+        /// <summary>
+        /// userHash control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userHash;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

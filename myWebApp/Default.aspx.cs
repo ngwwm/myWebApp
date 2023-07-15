@@ -22,6 +22,7 @@ namespace myWebApp
             if (User.Identity.IsAuthenticated)
             {
                 Debug.WriteLine($"User is authenicated - {User.Identity.Name}");
+                Debug.WriteLine(System.Security.Claims.ClaimsPrincipal.Current.FindFirst(System.Security.Claims.ClaimTypes.Email).Value);
             }
         }
         protected void btnUnhandled_Click(object sender, EventArgs e)
