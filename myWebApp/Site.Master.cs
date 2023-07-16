@@ -20,8 +20,11 @@ namespace myWebApp
             ClaimsPrincipal principal = HttpContext.Current.User as ClaimsPrincipal;
             var email = principal?.FindFirst(x => x.Type == ClaimTypes.Email)?.Value;
 
-            userName.Text = name;
-            userEmail.Text = email;
+            intercom_appId.Value = ConfigurationManager.AppSettings["Intercom:appId"];
+
+            intercom_userName.Value = name;
+            intercom_userEmail.Value = email;
+
             lblUsername.Text = $"{name} &lt;{email}&gt;";
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -42,8 +45,7 @@ namespace myWebApp
                 using (HMACSHA256 hmacSha256 = new HMACSHA256(keyBytes))
                 {
                     byte[] hashBytes = hmacSha256.ComputeHash(messageBytes);
-                    //userHash.Text = Convert.ToBase64String(hashBytes);
-                    userHash.Text = ByteArrayToHexString(hashBytes);
+                    intercom_userHash.Value = ByteArrayToHexString(hashBytes);
                 }
             }
         }
