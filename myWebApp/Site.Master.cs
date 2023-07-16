@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace myWebApp
 {
@@ -18,12 +19,9 @@ namespace myWebApp
             var name = HttpContext.Current.User.Identity.Name;
 
             ClaimsPrincipal principal = HttpContext.Current.User as ClaimsPrincipal;
-            var email = principal?.FindFirst(x => x.Type == ClaimTypes.Email)?.Value;
-
-            intercom_appId.Value = ConfigurationManager.AppSettings["Intercom:appId"];
-
-            intercom_userName.Value = name;
-            intercom_userEmail.Value = email;
+            string email = principal?.FindFirst(x => x.Type == ClaimTypes.Email)?.Value;
+            string appId = ConfigurationManager.AppSettings["Intercom:appId"];
+            string userHash = "";
 
             lblUsername.Text = $"{name} &lt;{email}&gt;";
 
@@ -45,9 +43,24 @@ namespace myWebApp
                 using (HMACSHA256 hmacSha256 = new HMACSHA256(keyBytes))
                 {
                     byte[] hashBytes = hmacSha256.ComputeHash(messageBytes);
-                    intercom_userHash.Value = ByteArrayToHexString(hashBytes);
+                    userHash = ByteArrayToHexString(hashBytes);
                 }
             }
+
+            var data = new
+            {
+                api_base = "https://api-iam.intercom.io",
+                app_id = appId,
+                name = name,
+                email = email,
+                user_hash = userHash
+            };
+
+            // Serialize the object to JSON
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            string script = $"window.intercomSettings = {json};";
+            ScriptManager.RegisterStartupScript(this, GetType(), "IntercomSettingsScript", script, true);
+
         }
         public static string ByteArrayToHexString(byte[] byteArray)
         {
