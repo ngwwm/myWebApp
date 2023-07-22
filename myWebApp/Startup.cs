@@ -56,6 +56,7 @@ namespace myWebApp
             
             string auth0PostLogoutRedirectUri = ConfigurationManager.AppSettings["auth0:PostLogoutRedirectUri"];
 
+            string workingFolder = ConfigurationManager.AppSettings["WorkingFolder"];
             // Set Cookies as default authentication type
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
