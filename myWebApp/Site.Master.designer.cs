@@ -42,42 +42,6 @@ namespace myWebApp
         protected global::System.Web.UI.WebControls.HyperLink lnkLogout;
 
         /// <summary>
-        /// intercom_userName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField intercom_userName;
-
-        /// <summary>
-        /// intercom_userEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField intercom_userEmail;
-
-        /// <summary>
-        /// intercom_userHash control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField intercom_userHash;
-
-        /// <summary>
-        /// intercom_appId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField intercom_appId;
-
-        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

@@ -61,11 +61,6 @@
             </div>
         </div>
 
-        <asp:hiddenfield ID="intercom_userName" runat="server"></asp:hiddenfield>
-        <asp:hiddenfield ID="intercom_userEmail" runat="server"></asp:hiddenfield>
-        <asp:hiddenfield ID="intercom_userHash" runat="server"></asp:hiddenfield>
-        <asp:hiddenfield ID="intercom_appId" runat="server"></asp:hiddenfield>
-
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
