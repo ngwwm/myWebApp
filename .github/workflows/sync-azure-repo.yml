@@ -1,4 +1,4 @@
-name: Azure Pipeline
+name: Push Changes to Azure Repo
 
 on:
   push:
