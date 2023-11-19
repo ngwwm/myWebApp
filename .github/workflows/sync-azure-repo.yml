@@ -20,7 +20,6 @@ jobs:
         git config --global user.name "ngwmm"
         git remote add azure https://mywebapp4free:$AZURE_REPO_TOKEN@dev.azure.com/mywebapp4free/MyWebApp/_git/MyWebApp 
         git pull azure develop --allow-unrelated-histories
-        git merge origin develop
         git push azure develop
       env:
         AZURE_REPO_TOKEN: ${{ secrets.AZURE_REPO_TOKEN }}
