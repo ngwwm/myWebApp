@@ -18,3 +18,14 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+
+# Manual Push changes to Azure Repo
+
+git clone git@github.com:ngwwm/myWebApp.git s
+cd s
+git remote add azure https://mywebapp4free:h4phbawrxcxlpds3zjjsm65mnk6vwytoyh7fobu7v4peevidk3ba@dev.azure.com/mywebapp4free/MyWebApp/_git/MyWebApp
+git checkout develop
+git pull origin develop
+git push azure develop
+
